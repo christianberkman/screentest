@@ -16,11 +16,11 @@
 
   <script>
     /**
-     * Colors
+     * colorArray
      */
-    const colors = ['#f00', '#0f0', '#00f', '#fff', '#000']
-    var colorIndex = 0;
-    var colorMaxIndex = colors.length - 1;
+    const colorArray = ['#f00', '#0f0', '#00f', '#fff', '#000', 'cyan', 'magenta', 'yellow']
+    var colorCurrentIndex = 0;
+    var colorMaxIndex = colorArray.length - 1;
 
     /**
      * Body element
@@ -30,73 +30,70 @@
     /**
      * Key events
      */
-
     document.body.onkeyup = function(e){
       console.log(e.code)
       switch(e.code){
         case 'Space':
-          setColor(nextColor())
-          setBackground()
+          setColorIndex(nextColor())
+          setBodyBackground()
         break;
 
         case 'KeyR':
-          setColor(0) // red
-          setBackground()
+          setColorIndex(0) // red
+          setBodyBackground()
         break
 
         case 'KeyG':
-          setColor(1) // green
-          setBackground()
+          setColorIndex(1) // green
+          setBodyBackground()
         break
 
         case 'KeyB':
-          setColor(2) // blue
-          setBackground()
+          setColorIndex(2) // blue
+          setBodyBackground()
         break
 
         case 'KeyW':
-          setColor(3) // white
-          setBackground()
+          setColorIndex(3) // white
+          setBodyBackground()
         break
 
         case 'KeyX':
-          setColor(4) // black
-          setBackground()
-        break
+          setColorIndex(4) // black
+          setBodyBackground()
+        break;
       }
-
-
+  
     }
 
     /**
      * Set color of the body element
      */
-    function setBackground(){
-      bodyElement.style.background = colors[colorIndex]
-      console.log('Body element background set to ' + colors[colorIndex])
+    function setBodyBackground(){
+      bodyElement.style.background = colorArray[colorCurrentIndex]
+      console.log('Body element background set to ' + colorArray[colorCurrentIndex])
     }
 
     /**
      * Set the next color
      * string color
      */
-     function setColor(newIndex){
+     function setColorIndex(newIndex){
        if(newIndex < 0) return false;
        if(newIndex > colorMaxIndex) return false;
 
-       colorIndex = newIndex;
+       colorCurrentIndex = newIndex;
        return true;
      }
 
     /**
-     * Return the index of the next color, wrap around the colors array
+     * Return the index of the next color, wrap around the colorArray array
      * string color
      */
      function nextColor(){
-       if(colorIndex == colorMaxIndex) return 0;
-       else return colorIndex + 1
+       if(colorCurrentIndex == colorMaxIndex) return 0;
+       else return colorCurrentIndex + 1
      }
-
   </script>
 
 </html>
