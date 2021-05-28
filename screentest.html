@@ -38,7 +38,7 @@
      * Key events
      */
     document.body.onkeyup = function(e){
-      console.log(e.code)
+      // console.log(e.code)
       switch(e.code){
         case 'Space':
           setColorIndex(nextColor())
@@ -83,7 +83,7 @@
      */
     function setBodyBackground(){
       bodyElement.style.background = colorArray[colorCurrentIndex]
-      console.log('Body element background set to ' + colorArray[colorCurrentIndex])
+      // console.log('Body element background set to ' + colorArray[colorCurrentIndex])
     }
 
     /**
