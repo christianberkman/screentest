@@ -28,6 +28,13 @@
     const bodyElement = document.querySelector('body')
 
     /**
+     * Autoplay
+     */
+    var autoPlay = false
+    var autoPlayID
+
+
+    /**
      * Key events
      */
     document.body.onkeyup = function(e){
@@ -62,8 +69,13 @@
           setColorIndex(4) // black
           setBodyBackground()
         break;
+
+        case 'Enter':
+          if(autoPlay == false) { startAutoPlay(); break }
+          if(autoPlay == true) stopAutoPlay()
+        break
       }
-  
+
     }
 
     /**
@@ -94,6 +106,30 @@
        if(colorCurrentIndex == colorMaxIndex) return 0;
        else return colorCurrentIndex + 1
      }
+
+     /**
+      * Start autoplay function
+      */
+      function startAutoPlay(){
+
+        autoPlayID = setInterval(() => {
+          setColorIndex(nextColor())
+          setBodyBackground()
+        }, 1000)
+
+        autoPlay = true
+        console.log('Autoplay started')
+      }
+
+      function stopAutoPlay(){
+        clearInterval(autoPlayID)
+        autoPlayID = null
+        autoPlay = false
+        console.log('Autoplay stopped')
+      }
+
+
+
   </script>
 
 </html>
