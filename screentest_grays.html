@@ -1,0 +1,120 @@
+<html>
+  <head>
+    <style>
+      body{
+        width: 100%; height: 100%;
+        margin: 0; padding: 0;
+        overflow: hidden, hidden;
+        background: #000;
+        cursor: none;
+      }
+    </style>
+  </head>
+
+  <body>
+  </body>
+
+  <script>
+    /**
+     * colorArray
+     */
+     const grayMin = 0
+     const grayMax = 255
+     var grayCurrentIndex = 0;
+
+    /**
+     * Body element
+     */
+    const bodyElement = document.querySelector('body')
+
+    /**
+     * Autoplay
+     */
+    var autoPlay = false
+    var autoPlayID
+
+
+    /**
+     * Key events
+     */
+    document.body.onkeyup = function(e){
+
+      switch(e.code){
+        // Advance one shade of gray
+        case 'Space':
+        case 'ArrowRight':
+        case 'ArrowUp':
+          increaseGrayIndex()
+          setBodyBackground()
+        break;
+
+        // Go back one shade of gray
+        case 'Backspace':
+        case 'ArrowLeft':
+        case 'ArrowDown':
+          decreaseGrayIndex()
+          setBodyBackground()
+        break;
+
+        // Autoplay
+        case 'Enter':
+          if(autoPlay == false) { startAutoPlay(); break }
+          if(autoPlay == true) stopAutoPlay()
+        break
+      }
+
+    }
+
+    /**
+     * Set color of the body element
+     */
+    function setBodyBackground(){
+      bodyElement.style.background = 'rgb('+ grayCurrentIndex +',' + grayCurrentIndex + ',' + grayCurrentIndex +')'
+      console.log('Body element background set to '+ grayCurrentIndex)
+    }
+
+    /**
+     * Increase the grayIndex
+     */
+     function increaseGrayIndex(){
+       if(grayCurrentIndex < grayMin){ grayCurrentIndex = grayMin; return }
+       if(grayCurrentIndex == grayMax) { grayCurrentIndex = grayMin; return}
+
+       grayCurrentIndex = grayCurrentIndex + 1;
+     }
+
+     /**
+      * Decrease the grayIndex
+      */
+      function decreaseGrayIndex(){
+        if(grayCurrentIndex <= grayMin) { grayCurrentIndex = grayMax; return }
+        if(grayCurrentIndex < grayMax) { grayCurrentIndex = grayCurrentIndex - 1; return }
+        if(grayCurrentIndex >= grayMax) { grayCurrentIndex = grayMin; return }
+      }
+
+     /**
+      * Start autoplay function
+      */
+      function startAutoPlay(){
+
+        autoPlayID = setInterval(() => {
+          increaseGrayIndex()
+          setBodyBackground()
+        }, 50)
+
+        autoPlay = true
+        console.log('Autoplay started')
+      }
+
+      function stopAutoPlay(){
+        clearInterval(autoPlayID)
+        autoPlayID = null
+        autoPlay = false
+        console.log('Autoplay stopped')
+      }
+
+
+
+  </script>
+
+</html>
